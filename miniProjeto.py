@@ -142,3 +142,29 @@ print(df_vendas.info())
 
 # Exibe as 5 primeiras Linhas novamente para ver as novas colunas
 print(df_vendas.head())
+
+# Análise 1 - Top 10 Produtos Mais Vendidos
+
+# Agrupa por nome do produto, soma a quantidade e ordena para encontrar as mais vendidos
+top_10_produtos =  df_vendas.groupby('Nome_Produto')['Quantidade'].sum().sort_values(ascending=False).head(10)
+
+# Exibe o resultado
+print(top_10_produtos)
+
+# Define um estilo para os gráficos
+sns.set_style("whitegrid")
+
+# Cria a figura e os eixos
+plt.figure(figsize=(12,7))
+
+# Cria o gráfico de barras horizontais
+top_10_produtos.sort_values(ascending=True).plot(kind='barh', color= 'skyblue')
+
+# Adiciona títulos e labels
+plt.title('Top 10 Produtos Mais Vendidos',fontsize = 16)
+plt.xlabel('Quantidade Vendida',fontsize=12)
+plt.ylabel('Produto',fontsize=12)
+
+#Exibe o gráfico
+plt.tight_layout()
+plt.show()
